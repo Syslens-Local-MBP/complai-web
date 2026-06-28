@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --eu-blue: #003399;
+  --eu-gold: #FFCC00;
+  --bg: #FAFAFA;
+  --text: #1A1A2E;
+  --success: #16A34A;
+  --warning: #D97706;
+  --danger: #DC2626;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  :root {
+    --background: #FAFAFA;
+    --foreground: #1A1A2E;
+    --card: #ffffff;
+    --card-foreground: #1A1A2E;
+    --primary: #003399;
+    --primary-foreground: #ffffff;
+    --secondary: #f1f5f9;
+    --secondary-foreground: #1A1A2E;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --accent: #FFCC00;
+    --accent-foreground: #1A1A2E;
+    --destructive: #DC2626;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #003399;
+    --radius: 0.5rem;
+  }
+  * { border-color: var(--color-border); }
+  body { background: var(--color-background); color: var(--color-foreground); }
+}

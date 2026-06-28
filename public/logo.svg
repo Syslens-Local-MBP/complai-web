@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="none">
+  <path d="M8 20L16 12L24 20L16 28Z" fill="#003399"/>
+  <path d="M16 12L24 20L20 24L12 24Z" fill="#FFCC00" opacity="0.8"/>
+  <text x="30" y="26" font-family="Inter, sans-serif" font-weight="700" font-size="18" fill="#003399">Compl</text>
+  <text x="84" y="26" font-family="Inter, sans-serif" font-weight="700" font-size="18" fill="#FFCC00">AI</text>
+</svg>
