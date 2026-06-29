@@ -44,7 +44,8 @@ export async function POST(request: NextRequest) {
   const sectorLabel = SECTOR_LABELS[answers.sector] ?? answers.sector
   const riskContext = RISK_LEVEL_CONTEXT[result.riskLevel] ?? ''
   const requirementsSummary = result.requirements
-    .map(r => `- ${r.article}: ${r.title} (${r.met ? 'erfüllt' : 'nicht erfüllt'})`)
+    .map((r: { articleRef: string; title: string; mandatory: boolean }) =>
+      `- ${r.articleRef}: ${r.title} (${r.mandatory ? 'Pflicht' : 'Empfohlen'})`)
     .join('\n')
 
   const prompt = `Du bist ein spezialisierter EU AI Act Compliance-Experte. Erstelle eine präzise, strukturierte Rechtsanalyse auf Deutsch.
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
 **Verwendungsart:** ${answers.usageType}
 **Einstufung:** ${result.riskLevel}
 **Rechtliche Einordnung:** ${riskContext}
-**Compliance-Stand (${result.requirements.filter(r => r.met).length}/${result.requirements.length} Anforderungen erfüllt):**
+**Compliance-Anforderungen (${result.requirements.length} relevant):**
 ${requirementsSummary}
 
 Erstelle eine Analyse mit folgenden Abschnitten in Markdown:
@@ -90,7 +91,7 @@ Sei konkret, praxisorientiert und zitiere relevante Artikel. Keine allgemeinen P
       }
     },
     cancel() {
-      stream.controller.abort()
+      stream.controller?.abort()
     },
   })
 
