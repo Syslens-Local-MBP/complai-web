@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ComplAI — EU AI Act Compliance Platform
 
-## Getting Started
+> **Status: Archiviert (Juni 2026)** — Proof of Concept, vollständig funktional.
 
-First, run the development server:
+Live unter: https://complai.ai-workx.de  
+GitHub: https://github.com/Syslens-Local-MBP/complai-web
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Was ist ComplAI?
+
+Feature-reiche Alternative zum offiziellen EU AI Act Explorer, gebaut als 24h-Proof-of-Concept. Zielgruppe: Juristen, Compliance-Beauftragte, KI-Entwickler und Einsteiger.
+
+## Features
+
+- **172 EU AI Act Artikel** — vollständiger Gesetzestext mit vereinfachten Erklärungen
+- **Multi-Persona-Ansicht** — Legal, Business, Developer, Learner
+- **KI-Risikoklassifizierung** — 6-Schritt-Wizard mit KI-Tiefenanalyse (OpenRouter/Claude)
+- **Gamification** — 7 Level, 12 Badges, Streaks, 25-Fragen-Quiz
+- **Volltextsuche** — Fuse.js clientseitig
+- **Lernpfade** — 6 kuratierte Pfade
+- **Glossar** — 33 Fachbegriffe mit Kategorien
+- **Cloudflare Access OTP** — Zugang nur per E-Mail-OTP
+
+## Tech-Stack
+
+| Schicht | Technologie |
+|---------|-------------|
+| Framework | Next.js 16.2.9, Turbopack, App Router |
+| Sprache | TypeScript (strict) |
+| UI | shadcn/ui + Tailwind CSS |
+| Auth | Supabase (Frankfurt) |
+| KI-Analyse | OpenRouter → claude-sonnet-4-6 |
+| E-Mail | Resend (noreply@syslens.app) |
+| Hosting | Vercel Frankfurt (fra1) |
+| DNS/Access | Cloudflare Zero Trust OTP |
+| Suche | Fuse.js v7 |
+
+## Infrastruktur
+
+```
+complai.ai-workx.de
+  → Cloudflare Access OTP (info@ai-workx.de, lawrence.tjia@gmail.com)
+  → Cloudflare DNS CNAME
+  → Vercel (fra1, infosyslens-7649s-projects)
+  → Next.js App
+  → Supabase (souglqczzqmccvayzxqr.supabase.co, Frankfurt)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Lokale Entwicklung
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# ENV-Vars benötigt (siehe .env.example)
+cp .env.example .env.local
+# Werte eintragen: Supabase Anon Key, OpenRouter Key, Resend Key
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+npm install
+npm run dev
+```
 
-## Learn More
+## Vercel Deployment
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+vercel link --project complai-web
+vercel --prod
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Supabase Schema
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+SQL in `supabase/schema.sql` ausführen (Supabase Studio → SQL Editor).
 
-## Deploy on Vercel
+## Archiv-Hinweis
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Dieses Projekt wurde als Proof-of-Concept in 24 Stunden entwickelt und anschließend archiviert.  
+Die Cloudflare Access App (`complai.ai-workx.de`) ist deaktiviert — für ähnliche Produkte wiederverwendbar.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Fehlende ENV-Vars für volle Funktion:**
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` — Supabase Dashboard → Project Settings → API
+- `SUPABASE_SERVICE_ROLE_KEY` — gleiche Stelle
